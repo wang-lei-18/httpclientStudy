@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fmStudy:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>fmStudy</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="fmStudy-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="fmStudy:war exploded" />
+    </root>
+  </artifact>
+</component>
