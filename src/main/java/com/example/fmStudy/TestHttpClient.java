@@ -3,6 +3,7 @@ package com.example.fmStudy;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.example.fmStudy.dto.User;
+import com.example.fmStudy.utils.HttpClientUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -64,27 +65,40 @@ public class TestHttpClient {
         user.setId("1");
         user.setUserName("张三");
 //        reqByPostJson("http://localhost:8080/fmStudy/hello/postByJson", user);
-//        String requestXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-//                "<envelope>" +
-//                "<header>" +
-//                "<authen name=\"default\">" +
-//                "<data timestamp=\"20190928153121100\"/>" +
-//                "<data sequence=\"a93ae944445003093eab06cb90b31bba\"/>" +
-//                "<data appid=\"8fc22437adbd42eaaf474d65d3d44aba\"/>" +
-//                "<data service_code=\"1001\"/>" +
-//                "</authen>" +
-//                "</header>" +
-//                "<body>" +
-//                "<logic name=\"啊\">" +
-//                "<data zdbh=\"JJ202208121150517002\"/>" +
-//                "</logic>" +
-//                "</body>" +
-//                "</envelope>";
+        String requestXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<envelope>" +
+                "<header>" +
+                "<authen name=\"default\">" +
+                "<data timestamp=\"20190928153121100\"/>" +
+                "<data sequence=\"a93ae944445003093eab06cb90b31bba\"/>" +
+                "<data appid=\"8fc22437adbd42eaaf474d65d3d44aba\"/>" +
+                "<data service_code=\"1001\"/>" +
+                "</authen>" +
+                "</header>" +
+                "<body>" +
+                "<logic name=\"啊\">" +
+                "<data zdbh=\"JJ202208121150517002\"/>" +
+                "</logic>" +
+                "</body>" +
+                "</envelope>";
 //        reqByPostXml("http://localhost:8080/fmStudy/hello/postByXml", requestXml);
 //        reqByPostFile("http://localhost:8080/fmStudy/hello/postByFile", "D:\\测试.txt");
 //        reqByPostFileAndParam("http://localhost:8080/fmStudy/hello/postByFileAndParam", "D:\\测试.txt", paramMap);
 //        reqByPostFileAndJson("http://localhost:8080/fmStudy/hello/postByFileAndJson", "D:\\测试.txt", user);
-        reqByPostJsonAndReturnObj("http://localhost:8080/fmStudy/hello/postByJsonAndReturnObj", user);
+//        reqByPostJsonAndReturnObj("http://localhost:8080/fmStudy/hello/postByJsonAndReturnObj", user);
+        HttpClientUtils httpClientUtils = new HttpClientUtils();
+//        System.out.println(httpClientUtils.doGet("http://localhost:8080/fmStudy/hello/getNotParam"));
+//        System.out.println(httpClientUtils.doGet("http://localhost:8080/fmStudy/hello/getByParams", paramMap));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postNotParam"));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByParams", paramMap));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByJson", user));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByParamsAndJson", paramMap, user));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByXml", requestXml));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByFile", "D:\\测试.txt", "files"));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByFileAndParam", "D:\\测试.txt", "files", paramMap));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByFileAndJson", "D:\\测试.txt", "files", user, "jsonData"));
+//        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByFileAndParamAndJson", "D:\\测试.txt", "files", paramMap, user, "jsonData"));
+        System.out.println(httpClientUtils.doPost("http://localhost:8080/fmStudy/hello/postByJsonAndReturnObj", user));
     }
 
     // 没有参数的get请求

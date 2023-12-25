@@ -1,21 +1,17 @@
 package com.example.fmStudy.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.example.fmStudy.dto.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 /**
  * <pre>
@@ -71,6 +67,12 @@ public class HelloController {
     @ResponseBody
     public String postByJson(@RequestBody User user) {
         return "post请求，请求类型为JSON，请求参数为：" + user.toString();
+    }
+
+    @RequestMapping(value = "postByParamsAndJson", method = RequestMethod.POST)
+    @ResponseBody
+    public String postByParamsAndJson(@RequestBody User user, @RequestParam String pageNum, @RequestParam String pageSize) {
+        return "post请求，请求参数为pageNum：" + pageNum + "，pageSize：" + pageSize + "，JSON请求参数" + user;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "postByXml")
@@ -139,6 +141,23 @@ public class HelloController {
         String jsonData = request.getParameter("jsonData");
         User user = JSONObject.parseObject(jsonData, User.class);
         return "post请求，请求类型为文件和json，JSON值：" + user;
+    }
+
+    @RequestMapping(value = "postByFileAndParamAndJson", method = RequestMethod.POST)
+    @ResponseBody
+    public String postByFileAndParamAndJson(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // 获取param
+        String pageSize = request.getParameter("pageSize");
+        String pageNum = request.getParameter("pageNum");
+        // 获取json
+        String jsonData = request.getParameter("jsonData");
+        User user = JSONObject.parseObject(jsonData, User.class);
+        // 获取文件
+        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartHttpServletRequest.getFile("files");
+        File saveFile = new File("D:\\4_copy.txt");
+        FileCopyUtils.copy(multipartFile.getBytes(), saveFile);
+        return "post请求，文件类型为文件，param和json，请求参数为pageNum：" + pageNum + "，pageSize：" + pageSize + "，JSON值：" + user;
     }
 
     @RequestMapping(value = "postByJsonAndReturnObj", method = RequestMethod.POST)
